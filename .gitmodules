@@ -1,0 +1,6 @@
+[submodule "mariadb/mariadb-docker"]
+	path = mariadb/mariadb-docker
+	url = https://github.com/MariaDB/mariadb-docker.git
+[submodule "mariadb/server"]
+	path = mariadb/server
+	url = https://github.com/MariaDB/server
