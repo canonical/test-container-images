@@ -1,0 +1,26 @@
+name: mariadb
+base: ubuntu@24.04
+version: "10.5"
+summary: MariaDB database server and client
+description: |
+    MariaDB is a fast, stable and true multi-user, multi-threaded SQL database server.
+    SQL (Structured Query Language) is the most popular database query language in the world.
+    The main goals of MariaDB are speed, robustness and ease of use.
+platforms:
+    amd64:
+
+parts:
+    mariadb:
+        plugin: cmake
+        source: https://github.com/MariaDB/server.git
+        source-type: git
+        source-tag: mariadb-10.5.28
+        build-packages:
+            - bison
+            - ccache
+            - gnutls-dev
+            - libncurses5-dev
+            - zlib1g-dev
+        override-build: |
+            craftctl default
+            mysql-test/mtr --parallel=5 --mem --force --max-test-fail=40
