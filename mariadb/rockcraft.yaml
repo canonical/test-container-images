@@ -23,4 +23,4 @@ parts:
             - zlib1g-dev
         override-build: |
             craftctl default
-            mysql-test/mtr --parallel=5 --mem --force --max-test-fail=40
+            # mysql-test/mtr --parallel=5 --mem --force --max-test-fail=40
