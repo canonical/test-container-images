@@ -21,6 +21,8 @@ parts:
             - gnutls-dev
             - libncurses5-dev
             - zlib1g-dev
+        override-pull: |
+            craftctl default
         override-build: |
             craftctl default
             # mysql-test/mtr --parallel=5 --mem --force --max-test-fail=40
