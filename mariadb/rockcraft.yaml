@@ -9,8 +9,19 @@ description: |
 platforms:
     amd64:
 
-parts:
+services:
     mariadb:
+        override: replace
+        command: usr/bin/docker-entrypoint.sh
+
+parts:
+    patches:
+        plugin: dump
+        source: .
+
+    mariadb:
+        after:
+            - patches
         plugin: cmake
         source: https://github.com/MariaDB/server.git
         source-type: git
@@ -21,8 +32,15 @@ parts:
             - gnutls-dev
             - libncurses5-dev
             - zlib1g-dev
-        override-pull: |
-            craftctl default
         override-build: |
             craftctl default
             # mysql-test/mtr --parallel=5 --mem --force --max-test-fail=40
+
+    scripts:
+        plugin: dump
+        source: https://github.com/MariaDB/mariadb-docker.git
+        source-type: git
+        override-build: |
+            ls -lh
+            install -D --mode 0755 10.5/docker-entrypoint.sh ${CRAFT_PART_INSTALL}/usr/bin/docker-entrypoint.sh
+            install -D --mode 0755 10.5/healthcheck.sh ${CRAFT_PART_INSTALL}/usr/bin/healthcheck.sh
