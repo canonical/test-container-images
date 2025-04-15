@@ -20,8 +20,6 @@ parts:
         source: .
 
     mariadb:
-        after:
-            - patches
         plugin: cmake
         source: https://github.com/MariaDB/server.git
         source-type: git
